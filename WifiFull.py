@@ -116,45 +116,29 @@ for j in range (NumeroDeTxs):
         #print any(i in Colisiones for i in memoria)
         #any_in = lambda Colisiones, memoria: any(i in memoria for i in Colisiones)
         print compare(memoria,Colisiones)
-        #print k
-        #print Colisiones[k]
-        #if k in memoria:
-        if compare(memoria,Colisiones)==True:
-        #if any(g in Colisiones for g in memoria):
-            intentosEB= intentosEB +1
-            print "Exp Bck window order", intentosEB
-            time,value = Transmisores[k].EB(intentosEB)
-            EB_values[k] =  value
-            print "EB Values post colision------" , EB_values
-        else:
-            #print k
-            time,value = Transmisores[k].EB(2)
-            EB_values[k] =  value
-            memoria.append(k)
-            print "Memoria", memoria
-            print "EB Values post colision-------", EB_values
 
 
-        # for k in Colisiones:
-        #     print k
-        #     #print Colisiones[k]
-        #     #if k in memoria:
-        #     if compare(memoria,Colisiones)==True:
-        #     #if any(g in Colisiones for g in memoria):
-        #         intentosEB= intentosEB +1
-        #         print "Exp Bck window order", intentosEB
-        #         time,value = Transmisores[k].EB(intentosEB)
-        #         EB_values[k] =  value
-        #         print "EB Values post colision------" , EB_values
-        #     else:
-        #         #print k
-        #         time,value = Transmisores[k].EB(2)
-        #         EB_values[k] =  value
-        #         memoria.append(k)
-        #         print "Memoria", memoria
-        #         print "EB Values post colision-------", EB_values
 
-        #Transmisores[k]
+        for k in Colisiones:
+            print k
+            #print Colisiones[k]
+            if k in memoria:
+            #if compare(memoria,Colisiones)==True:
+            #if any(g in Colisiones for g in memoria):
+                intentosEB= intentosEB +1
+                print "Exp Bck window order", intentosEB
+                time,value = Transmisores[k].EB(intentosEB)
+                EB_values[k] =  value
+                print "EB Values post colision------" , EB_values
+            else:
+                #print k
+                time,value = Transmisores[k].EB(2)
+                EB_values[k] =  value
+                memoria.append(k)
+                print "Memoria", memoria
+                print "EB Values post colision-------", EB_values
+
+        Transmisores[k]
     
 print Colisiones
 print EB_values
