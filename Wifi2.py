@@ -5,13 +5,13 @@ from decimal import *
 import random as rn 
 #seed(1)
 getcontext().prec = 8
-Byt= Decimal(8)  #Size of a Byte
-DIFS = Decimal(40*Byt)
+Byt= 8  #Size of a Byte
+DIFS = 40*Byt
 SIFS =  20*Byt
 Datos = 1500*Byt
 Ack = 40*Byt 
 
-Rbps = Decimal(1000) #1000kbps = 1Mbps
+Rbps = 1000.00 #1000kbps = 1Mbps
 
 
 
@@ -56,14 +56,14 @@ j=0
 for i in range (0,1000):
     Times_CW_inDIFS,CW1 = EB(1)
 
-    times_array[[i],[0]] += 0  
-    times_array[[i],[1]] = times_array[[i],[0]] + T_DIFS
-    times_array[[i],[2]] = times_array[[i],[1]] + T_Datos
-    times_array[[i],[3]] = times_array[[i],[2]] + T_SIFS
-    times_array[[i],[4]] = times_array[[i],[3]] + T_Ack
-    times_array[[i],[5]] = times_array[[i],[4]] + Times_CW_inDIFS
-    times_array[[i+1],[0]] = times_array[[i],[5]]
-    PromWin +=  Decimal(CW1)
+    times_array[[i],[0]] += 0   #Time 0
+    times_array[[i],[1]] = times_array[[i],[0]] + T_DIFS #Add DIFS time
+    times_array[[i],[2]] = times_array[[i],[1]] + T_Datos #Add Data time
+    times_array[[i],[3]] = times_array[[i],[2]] + T_SIFS #Add SIFS time
+    times_array[[i],[4]] = times_array[[i],[3]] + T_Ack #Add ACK Time
+    times_array[[i],[5]] = times_array[[i],[4]] + Times_CW_inDIFS #Add EB times, defined as DIFS unit times
+    times_array[[i+1],[0]] = times_array[[i],[5]] #Next transmision time 0 = last time of previous transmision
+    PromWin += CW1  #Add of all EB times 
 
 
 print times_array
@@ -71,5 +71,5 @@ print times_array
 R_experimental = (1000*Datos)/ times_array[999][5]
 print "La velocidad de transmision promedio es : ", R_experimental
 #print PromWin
-PromWin = "El valor promedio de valores tomados por EB es: ", Decimal(PromWin/1000)
+PromWin = "El valor promedio de valores tomados por EB es: ", PromWin/1000
 print PromWin
