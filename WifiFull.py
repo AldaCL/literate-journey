@@ -25,7 +25,7 @@ T_Ack = Ack/Rbps
     #print T_Ack
 
 Transmisores = []
-NumeroDeTxs= 50
+NumeroDeTxs= 10
 SLargo = T_Datos + T_SIFS + T_Ack
 SCorto = T_DIFS
 
@@ -36,13 +36,15 @@ def compare(a, b):
     return not set(a).isdisjoint(b)
 
 class Transmisor(object):
+
     def __init__(self,index):
         self.index = index
+        self.EBval = 0
         #super(Transmisor, self).__init__()
         
     
     def EB(self,times): #Exponential Backup function. 
-        self.CW = 0
+        #self.CW = 0
         maxx= np.power(2,times)
         fullWindow = range(0, 8*maxx, 1)
         CW =rn.choice(fullWindow)
@@ -61,12 +63,12 @@ indexOfColisions = []
 
 for i in range (NumeroDeTxs):
     Transmisores.append(Transmisor(i))
-    time,value = Transmisores[i].EB(1)
+    time,Transmisores[i].EBval = Transmisores[i].EB(1)
     print time
-    print value
+    print Transmisores[i].EBval
     #print Transmisores[i].index
     #print Transmisores[i].EB(1)
-    EB_values.append(value)
+    EB_values.append(Transmisores[i].EBval)
 
 print  EB_values
 
@@ -76,12 +78,13 @@ print  EB_values
 existioCol = False
 memoria = []
 intentosEB = 2
+while Total_PKG <10000:
 
-for j in range (NumeroDeTxs):
     print "***********Start************"
     get_indexes = lambda EB_values, xs : [i for (y,i) in zip(xs, range(len(xs))) if EB_values==y]
     Colisiones = get_indexes(0, EB_values) #Obtiene indices de los transmisores que intentan transmitir con EB =0
-    
+    Total_TIME += SCorto
+
     if len(Colisiones)==1:
         Total_TIME += SLargo
         print "Transmision hecha por el nodo" , Colisiones[0]
@@ -89,11 +92,15 @@ for j in range (NumeroDeTxs):
         EB_values=list(map(lambda x: x - 1, EB_values))
         print EB_values
         intentosEB = 2
-        memoria = []
+        if Colisiones[0] in memoria:
+            memoria.remove(Colisiones[0])
+            print "Restarting ventana de EB para el valor", Colisiones[0]
+        #memoria = []
         print "memoria en tx ", memoria
 
         time,value = Transmisores[Colisiones[0]].EB(intentosEB-1)
         EB_values[Colisiones[0]] =  value
+        Total_PKG += 1
 
 
 
@@ -101,7 +108,7 @@ for j in range (NumeroDeTxs):
         print EB_values
         EB_values=list(map(lambda x: x - 1, EB_values))
         print EB_values
-        memoria = []
+        #memoria = []
         print "memoria en Tiempo muerto ", memoria
 
     else:
@@ -116,8 +123,6 @@ for j in range (NumeroDeTxs):
         #print any(i in Colisiones for i in memoria)
         #any_in = lambda Colisiones, memoria: any(i in memoria for i in Colisiones)
         print compare(memoria,Colisiones)
-
-
 
         for k in Colisiones:
             print k
@@ -138,34 +143,14 @@ for j in range (NumeroDeTxs):
                 print "Memoria", memoria
                 print "EB Values post colision-------", EB_values
 
-        Transmisores[k]
-    
+        #Transmisores[k]
+        
 print Colisiones
 print EB_values
+print "Paquetes enviados: ", Total_PKG 
+print "Tiempo tomado> ", Total_TIME
 
 # for tries in range(10000000):
 #     if Total_PKG ==10000:
 #         break
 #     else: 
-
-        
-
-times_array = (np.zeros((1001,6), dtype=np.dtype(Decimal)))
-
-PromWin = 0
-CW1 = 0
-
-i=0
-j=0
-# for i in range (0,1000):
-#     Times_CW_inDIFS,CW1 = EB(1)
-
-#     times_array[[i],[0]] += 0  
-#     times_array[[i],[1]] = times_array[[i],[0]] + T_DIFS
-#     times_array[[i],[2]] = times_array[[i],[1]] + T_Datos
-#     times_array[[i],[3]] = times_array[[i],[2]] + T_SIFS
-#     times_array[[i],[4]] = times_array[[i],[3]] + T_Ack
-#     times_array[[i],[5]] = times_array[[i],[4]] + Times_CW_inDIFS
-#     times_array[[i+1],[0]] = times_array[[i],[5]]
-#     PromWin +=  Decimal(CW1)
-
