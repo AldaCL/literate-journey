@@ -17,13 +17,13 @@ Rbps = 1000.00 #1000kbps = 1Mbps
 
 
 T_DIFS = DIFS/Rbps
-print "Tiempo de transmision de DIFS: ", T_DIFS
+print "Tiempo de transmision de DIFS: ", T_DIFS, "ms"
 T_SIFS = SIFS/Rbps
-print "Tiempo de transmision de SIFS: ", T_SIFS     
+print "Tiempo de transmision de SIFS: ", T_SIFS, "ms"     
 T_Datos = Datos/Rbps
-print "Tiempo de transmision de Datos: ", T_Datos
+print "Tiempo de transmision de Datos: ", T_Datos, "ms"
 T_Ack = Ack/Rbps
-print "Tiempo de transmision de  Ack ", T_Ack
+print "Tiempo de transmision de  Ack ", T_Ack, "ms"
 print "-------------------------------------------------------------------------------------------------------------------------"
 print "Arreglo de tiempos: + "
 
@@ -69,7 +69,7 @@ print times_array
 print "-------------------------------------------------------------------------------------------------------------------------"
 
 R_experimental = (1000*Datos)/ times_array[999][5]
-print "La velocidad de transmision promedio es : ", R_experimental
+print "La velocidad de transmision promedio es : ", R_experimental, "Kbps"
 #print PromWin
 print "El valor promedio de valores tomados por EB es: ", PromWin/1000
 #print PromWin

@@ -52,7 +52,7 @@ class Transmisor(object):
         #CW = rn.randrange(0, 16*times,1)
         #print fullWindow
         #print CW
-        CW_inDIFS = CW*DIFS
+        CW_inDIFS =  CW*DIFS
         #print CW_inDIFS
         Times_CW_inDIFS = CW_inDIFS/Rbps
         #print Times_CW_inDIFS
