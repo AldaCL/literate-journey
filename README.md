@@ -1,5 +1,5 @@
 # Wifi packet transmission simulation
-#####Project for Wireless and mobile networks, FI. 
+#### Project for Wireless and mobile networks, FI. 
 
 Wi-Fi performance simulation, using the aloha protocol as collision resolution algorithm.
 
