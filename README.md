@@ -7,5 +7,7 @@ Wifi2.py file, is the first part of proyect. It returns the Rbps of data in a tr
 
 Some SS of ejecution:
 
-![alt text]https://github.com/AldaCL/wifi-aloha_sim/blob/master/src/ejecucion1.png
-![alt text]https://github.com/AldaCL/wifi-aloha_sim/blob/master/src/ejecucion2.png
+![alt text](https://github.com/AldaCL/wifi-aloha_sim/blob/master/src/ejecucion1.png)
+
+![alt text](https://github.com/AldaCL/wifi-aloha_sim/blob/master/src/ejecucion2.png)
+
