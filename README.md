@@ -1,4 +1,4 @@
-# Wifi packet transmision simulation
+# Wifi packet transmission simulation
 
 Wi-Fi performance simulation, using the aloha protocol as collision resolution algorithm.
 
